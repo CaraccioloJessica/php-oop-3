@@ -77,7 +77,7 @@ class Person
   // funzione che restituisce una stringa di testo formattata in HTML contenente i dettagli degli oggetti creati nella classe
   public function getHtml()
   {
-    return "<br><br>" . "Nome: " .
+    return "Nome: " .
       $this->getName() .
       "<br>" .
       "Cognome: " .
@@ -132,9 +132,9 @@ class Employee extends Person
 
   public function getHtml()
   {
-    return parent::getHtml() .
-      $this->getSalary()->getHtml() .
-      $this->getHire();
+    return "<h3>Impiegato</h3>" . parent::getHtml() .
+      $this->getSalary()->getHtml() . "<br>" .
+      "Data di assunzione: " . $this->getHire();
   }
 }
 
@@ -187,16 +187,25 @@ class Salary
     return $this->fourteenth_month;
   }
 
+  public function getAnnual()
+  {
+    return $this->getMonthly() * 12 + $this->getThirteenth() + $this->getFourteenth();
+  }
+
   public function getHtml()
   {
-    return "<br>" . "Mensile: " .
+    return "<h4>Stipendio</h4>"
+      . "Mensile: " .
       $this->getMonthly() .
       "<br>" .
       "Tredicesima: " .
       $this->getThirteenth() .
       "<br>" .
       "Quattordicesima: " .
-      $this->getFourteenth();
+      $this->getFourteenth() .
+      "<br>" .
+      "Annuale: " .
+      $this->getAnnual() . " $";
   }
 }
 
@@ -238,7 +247,7 @@ class Boss extends Person
 
   public function getHtml()
   {
-    return parent::getHtml() . "<br>"
+    return "<h3>Capo</h3>" . parent::getHtml() . "<br>"
       . "Dividendo: " . $this->getDividend() . "<br>"
       . "Bonus: " . $this->getBonus();
   }
@@ -246,29 +255,29 @@ class Boss extends Person
 
 // creazione di tre oggetti, utilizzando un costruttore e richiamando i dettagli definiti nel padre.
 $salary = new Salary(
-  1200,
-  1200,
-  1200
+  "1200 $",
+  "1200 $",
+  "1200 $"
 );
 
 $employees = new Employee(
   "Carlo",
   "Cracco",
-  12 - 12 - 1994,
+  "12-12-1994",
   "Milano",
   "84tf8re9hg8f",
   $salary,
-  01 - 01 - 2020
+  "01-01-2020"
 );
 
 $boss = new Boss(
   "Bruno",
   "Barbieri",
-  12 - 01 - 1974,
+  "12-01-1974",
   "Milano",
   "124fgfh44f",
-  2.70,
-  3000
+  "2.70",
+  "3000"
 );
 
 
