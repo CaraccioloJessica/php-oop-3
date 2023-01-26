@@ -189,7 +189,7 @@ class Salary
 
   public function getHtml()
   {
-    return "<br><br>" . "Mensile: " .
+    return "<br>" . "Mensile: " .
       $this->getMonthly() .
       "<br>" .
       "Tredicesima: " .
@@ -245,6 +245,12 @@ class Boss extends Person
 }
 
 // creazione di tre oggetti, utilizzando un costruttore e richiamando i dettagli definiti nel padre.
+$salary = new Salary(
+  1200,
+  1200,
+  1200
+);
+
 $employees = new Employee(
   "Carlo",
   "Cracco",
@@ -265,13 +271,8 @@ $boss = new Boss(
   3000
 );
 
-$salary = new Salary(
-  1200,
-  1200,
-  1200
-);
 
 // stampa in pagina il risultato
 echo $employees->getHtml();
 echo $boss->getHtml();
-echo $salary->getHtml();
+// echo $salary->getHtml();
