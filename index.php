@@ -204,7 +204,7 @@ class Salary
       "Quattordicesima: " .
       $this->getFourteenth() .
       "<br>" .
-      "Annuale: " .
+      "Stipendio annuale: " .
       $this->getAnnual() . " $";
   }
 }
@@ -245,11 +245,17 @@ class Boss extends Person
     return $this->bonus;
   }
 
+  public function getAnnualIncome()
+  {
+    return $this->getDividend() * 12 + $this->getBonus();
+  }
+
   public function getHtml()
   {
     return "<h3>Capo</h3>" . parent::getHtml() . "<br>"
       . "Dividendo: " . $this->getDividend() . "<br>"
-      . "Bonus: " . $this->getBonus();
+      . "Bonus: " . $this->getBonus() . "<br>"
+      . "Reddito Annuale: " . $this->getAnnualIncome() . "$";
   }
 }
 
@@ -276,8 +282,8 @@ $boss = new Boss(
   "12-01-1974",
   "Milano",
   "124fgfh44f",
-  "2.70",
-  "3000"
+  "2.70 $",
+  "3000 $"
 );
 
 
