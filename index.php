@@ -97,14 +97,44 @@ class Person
 // classe impiegato
 class Employee extends Person
 {
-  public function __construct($name, $surname, $date_of_birth, $place_of_birth, $fiscal_code)
+  private Salary $salary;
+  private $hire_date;
+
+  public function __construct($name, $surname, $date_of_birth, $place_of_birth, $fiscal_code, Salary $salary, $hire_date)
   {
     parent::__construct($name, $surname, $date_of_birth, $place_of_birth, $fiscal_code);
+
+    $this->setSalary($salary);
+    $this->setHire($hire_date);
+  }
+
+  // metodo per stipendio
+  public function setSalary(Salary $salary)
+  {
+    $this->salary = $salary;
+  }
+
+  public function getSalary()
+  {
+    return $this->salary;
+  }
+
+  // metodo data di assunzione
+  public function setHire($hire_date)
+  {
+    $this->hire_date = $hire_date;
+  }
+
+  public function getHire()
+  {
+    return $this->hire_date;
   }
 
   public function getHtml()
   {
-    return parent::getHtml();
+    return parent::getHtml() .
+      $this->getSalary()->getHtml() .
+      $this->getHire();
   }
 }
 
@@ -218,25 +248,27 @@ class Boss extends Person
 $employees = new Employee(
   "Carlo",
   "Cracco",
-  "12-12-1994",
+  12 - 12 - 1994,
   "Milano",
-  "84tf8re9hg8f"
+  "84tf8re9hg8f",
+  $salary,
+  01 - 01 - 2020
 );
 
 $boss = new Boss(
   "Bruno",
   "Barbieri",
-  "12-01-1974",
+  12 - 01 - 1974,
   "Milano",
   "124fgfh44f",
-  "2.70",
-  "3000"
+  2.70,
+  3000
 );
 
 $salary = new Salary(
-  "1200",
-  "1200",
-  "1200"
+  1200,
+  1200,
+  1200
 );
 
 // stampa in pagina il risultato
