@@ -94,7 +94,7 @@ class Person
   }
 }
 
-// divisione prodotto per tipologie (definite con classi), utilizzando i metodi della classe padre
+// classe impiegato
 class Employee extends Person
 {
   public function __construct($name, $surname, $date_of_birth, $place_of_birth, $fiscal_code)
@@ -108,6 +108,69 @@ class Employee extends Person
   }
 }
 
+// classe stipendio
+class Salary
+{
+  // variabili
+  private $monthly;
+  private $thirteenth_month;
+  private $fourteenth_month;
+
+  // costruttori
+  public function __construct($monthly, $thirteenth_month, $fourteenth_month)
+  {
+    $this->setMonthly($monthly);
+    $this->setThirteenth($thirteenth_month);
+    $this->setFourteenth($fourteenth_month);
+  }
+
+  // metodo per mensilità
+  public function setMonthly($monthly)
+  {
+    $this->monthly = $monthly;
+  }
+
+  public function getMonthly()
+  {
+    return $this->monthly;
+  }
+
+  // metodo per tredicesima
+  public function setThirteenth($thirteenth_month)
+  {
+    $this->thirteenth_month = $thirteenth_month;
+  }
+
+  public function getThirteenth()
+  {
+    return $this->thirteenth_month;
+  }
+
+  // metodo per quattordicesima
+  public function setFourteenth($fourteenth_month)
+  {
+    $this->fourteenth_month = $fourteenth_month;
+  }
+
+  public function getFourteenth()
+  {
+    return $this->fourteenth_month;
+  }
+
+  public function getHtml()
+  {
+    return "<br><br>" . "Mensile: " .
+      $this->getMonthly() .
+      "<br>" .
+      "Tredicesima: " .
+      $this->getThirteenth() .
+      "<br>" .
+      "Quattordicesima: " .
+      $this->getFourteenth();
+  }
+}
+
+// classe capo
 class Boss extends Person
 {
   private $dividend;
@@ -170,6 +233,13 @@ $boss = new Boss(
   "3000"
 );
 
+$salary = new Salary(
+  "1200",
+  "1200",
+  "1200"
+);
+
 // stampa in pagina il risultato
 echo $employees->getHtml();
 echo $boss->getHtml();
+echo $salary->getHtml();
