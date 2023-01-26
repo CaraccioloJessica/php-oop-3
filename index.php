@@ -77,7 +77,7 @@ class Person
   // funzione che restituisce una stringa di testo formattata in HTML contenente i dettagli degli oggetti creati nella classe
   public function getHtml()
   {
-    return "Nome: " .
+    return "<br><br>" . "Nome: " .
       $this->getName() .
       "<br>" .
       "Cognome: " .
@@ -90,8 +90,7 @@ class Person
       $this->getPlaceOfBirth() .
       "<br>" .
       "Codice fiscale: " .
-      $this->getFiscalCode() .
-      "<br><br>";
+      $this->getFiscalCode();
   }
 }
 
@@ -109,6 +108,49 @@ class Employee extends Person
   }
 }
 
+class Boss extends Person
+{
+  private $dividend;
+  private $bonus;
+
+  public function __construct($name, $surname, $date_of_birth, $place_of_birth, $fiscal_code, $dividend, $bonus)
+  {
+    parent::__construct($name, $surname, $date_of_birth, $place_of_birth, $fiscal_code);
+
+    $this->setDividend($dividend);
+    $this->setBonus($bonus);
+  }
+
+  // metodo per dividendo
+  public function setDividend($dividend)
+  {
+    $this->dividend = $dividend;
+  }
+
+  public function getDividend()
+  {
+    return $this->dividend;
+  }
+
+  // metodo per bonus
+  public function setBonus($bonus)
+  {
+    $this->bonus = $bonus;
+  }
+
+  public function getBonus()
+  {
+    return $this->bonus;
+  }
+
+  public function getHtml()
+  {
+    return parent::getHtml() . "<br>"
+      . "Dividendo: " . $this->getDividend() . "<br>"
+      . "Bonus: " . $this->getBonus();
+  }
+}
+
 // creazione di tre oggetti, utilizzando un costruttore e richiamando i dettagli definiti nel padre.
 $employees = new Employee(
   "Carlo",
@@ -118,5 +160,16 @@ $employees = new Employee(
   "84tf8re9hg8f"
 );
 
+$boss = new Boss(
+  "Bruno",
+  "Barbieri",
+  "12-01-1974",
+  "Milano",
+  "124fgfh44f",
+  "2.70",
+  "3000"
+);
+
 // stampa in pagina il risultato
 echo $employees->getHtml();
+echo $boss->getHtml();
