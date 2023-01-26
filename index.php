@@ -1,5 +1,4 @@
 <?php
-
 class Person
 {
   // variabili
@@ -10,7 +9,13 @@ class Person
   private $fiscal_code;
 
   // costruttori
-  public function __construct($name, $surname, $date_of_birth, $place_of_birth, $fiscal_code)
+  public function __construct(
+    $name,
+    $surname,
+    $date_of_birth,
+    $place_of_birth,
+    $fiscal_code
+  )
   {
     $this->setName($name);
     $this->setSurname($surname);
@@ -100,9 +105,23 @@ class Employee extends Person
   private Salary $salary;
   private $hire_date;
 
-  public function __construct($name, $surname, $date_of_birth, $place_of_birth, $fiscal_code, Salary $salary, $hire_date)
+  public function __construct(
+    $name,
+    $surname,
+    $date_of_birth,
+    $place_of_birth,
+    $fiscal_code,
+    Salary $salary,
+    $hire_date
+  )
   {
-    parent::__construct($name, $surname, $date_of_birth, $place_of_birth, $fiscal_code);
+    parent::__construct(
+      $name,
+      $surname,
+      $date_of_birth,
+      $place_of_birth,
+      $fiscal_code
+    );
 
     $this->setSalary($salary);
     $this->setHire($hire_date);
@@ -132,9 +151,12 @@ class Employee extends Person
 
   public function getHtml()
   {
-    return "<h3>Impiegato</h3>" . parent::getHtml() .
-      $this->getSalary()->getHtml() . "<br>" .
-      "Data di assunzione: " . $this->getHire();
+    return "<h3>Impiegato</h3>" .
+      parent::getHtml() .
+      $this->getSalary()->getHtml() .
+      "<br>" .
+      "Data di assunzione: " .
+      $this->getHire();
   }
 }
 
@@ -187,15 +209,18 @@ class Salary
     return $this->fourteenth_month;
   }
 
+  // metodo per calcolo stipendio annuale
   public function getAnnual()
   {
-    return $this->getMonthly() * 12 + $this->getThirteenth() + $this->getFourteenth();
+    return $this->getMonthly() * 12 +
+      $this->getThirteenth() +
+      $this->getFourteenth();
   }
 
   public function getHtml()
   {
-    return "<h4>Stipendio</h4>"
-      . "Mensile: " .
+    return "<h4>Stipendio</h4>" .
+      "Mensile: " .
       $this->getMonthly() .
       "<br>" .
       "Tredicesima: " .
@@ -205,7 +230,8 @@ class Salary
       $this->getFourteenth() .
       "<br>" .
       "Stipendio annuale: " .
-      $this->getAnnual() . " $";
+      $this->getAnnual() .
+      " $";
   }
 }
 
@@ -215,9 +241,23 @@ class Boss extends Person
   private $dividend;
   private $bonus;
 
-  public function __construct($name, $surname, $date_of_birth, $place_of_birth, $fiscal_code, $dividend, $bonus)
+  public function __construct(
+    $name,
+    $surname,
+    $date_of_birth,
+    $place_of_birth,
+    $fiscal_code,
+    $dividend,
+    $bonus
+  )
   {
-    parent::__construct($name, $surname, $date_of_birth, $place_of_birth, $fiscal_code);
+    parent::__construct(
+      $name,
+      $surname,
+      $date_of_birth,
+      $place_of_birth,
+      $fiscal_code
+    );
 
     $this->setDividend($dividend);
     $this->setBonus($bonus);
@@ -245,6 +285,7 @@ class Boss extends Person
     return $this->bonus;
   }
 
+  // metodo per calcolo reddito annuale
   public function getAnnualIncome()
   {
     return $this->getDividend() * 12 + $this->getBonus();
@@ -252,26 +293,30 @@ class Boss extends Person
 
   public function getHtml()
   {
-    return "<h3>Capo</h3>" . parent::getHtml() . "<br>"
-      . "Dividendo: " . $this->getDividend() . "<br>"
-      . "Bonus: " . $this->getBonus() . "<br>"
-      . "Reddito Annuale: " . $this->getAnnualIncome() . "$";
+    return "<h3>Capo</h3>" .
+      parent::getHtml() .
+      "<br>" .
+      "Dividendo: " .
+      $this->getDividend() .
+      "<br>" .
+      "Bonus: " .
+      $this->getBonus() .
+      "<br>" .
+      "Reddito Annuale: " .
+      $this->getAnnualIncome() .
+      "$";
   }
 }
 
 // creazione di tre oggetti, utilizzando un costruttore e richiamando i dettagli definiti nel padre.
-$salary = new Salary(
-  "1200 $",
-  "1200 $",
-  "1200 $"
-);
+$salary = new Salary("1200 $", "1200 $", "1200 $");
 
 $employees = new Employee(
   "Carlo",
   "Cracco",
   "12-12-1994",
   "Milano",
-  "84tf8re9hg8f",
+  "CRCCRL94T12F205M",
   $salary,
   "01-01-2020"
 );
@@ -281,11 +326,10 @@ $boss = new Boss(
   "Barbieri",
   "12-01-1974",
   "Milano",
-  "124fgfh44f",
+  "BRBBRN74A12F205M",
   "2.70 $",
   "3000 $"
 );
-
 
 // stampa in pagina il risultato
 echo $employees->getHtml();
